@@ -1,1 +1,2 @@
-# NetAloSDK-Android-Demo
+# NetAloSDKAndroid
+Demo Addon NetAlo SDK for Android. 
