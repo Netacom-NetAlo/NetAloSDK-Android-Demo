@@ -6,8 +6,8 @@ plugins {
 }
 
 android {
-    compileSdk = 30
-    buildToolsVersion = "30.0.3"
+    compileSdk = 31
+    buildToolsVersion = "31.0.0"
 
     defaultConfig {
         applicationId = "com.netacom.netalosdkandroid"
@@ -43,22 +43,38 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    signingConfigs {
+        create("release") {
+            storeFile = file("/Volumes/Data/Work/Netacom/SDK/NetAloSdkAndroid/demo.jks")
+            storePassword = "123456"
+            keyAlias = "Demo"
+            keyPassword = "123456"
+        }
+    }
+    buildTypes {
+        getByName("release")  {
+            signingConfig = signingConfigs.getByName("release")
+            isShrinkResources = false
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+        }
+    }
 }
 
 dependencies {
-    val hiltVersion = "2.37"
-    val sdkNetAloVersion = "1.6.13"
-    implementation("androidx.core:core-ktx:1.5.0")
-    implementation("androidx.appcompat:appcompat:1.3.0")
-    implementation("com.google.android.material:material:1.3.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0-beta02")
+    val hiltVersion = "2.38.1"
+    val sdkNetAloVersion = "2.0.10"
+    implementation("androidx.core:core-ktx:1.6.0")
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("com.google.android.material:material:1.4.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
-    debugImplementation("vn.netacom:NetAloFull-Dev:$sdkNetAloVersion") //(for dev)
-    releaseImplementation("vn.netacom:NetAloFull:$sdkNetAloVersion") //(for production)
+    implementation("vn.netacom:NetAloFull-Dev:$sdkNetAloVersion") //(for dev)
+    //releaseImplementation("vn.netacom:NetAloFull:$sdkNetAloVersion") //(for production)
 
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")

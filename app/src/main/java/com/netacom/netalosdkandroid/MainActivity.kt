@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         findViewById<AppCompatButton>(R.id.btnSdkOpenChat).clickDebounce {
-            NetAloSDK.openNetAloSDK(this, user9)
+            NetAloSDK.openNetAloSDK(context = this, neUserChat = user9)
         }
 
         findViewById<AppCompatButton>(R.id.btnBlockUser).clickDebounce {
