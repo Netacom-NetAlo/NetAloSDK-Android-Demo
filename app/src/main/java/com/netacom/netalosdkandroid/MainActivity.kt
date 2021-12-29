@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
-import bolts.Task.delay
 import com.google.android.material.snackbar.Snackbar
 import com.netacom.base.chat.binding.clickDebounce
 import com.netacom.base.chat.logger.Logger
@@ -24,9 +23,9 @@ import kotlinx.coroutines.flow.collect
 @FlowPreview
 class MainActivity : AppCompatActivity() {
 
-    private val user8 = NeUser(id = 281474976981354, token = "9c98a74053f60334758b9dd82d5e8dbe77b5d2b6", username = "Toan 0000", isAdmin = false)
+    private val user8 = NeUser(id = 281474977316576, token = "67d69a162e3661ee2286c36d2ba1af248fc2ccfb", username = "Toan 3333", isAdmin = false)
 
-    private val user9 = NeUser(id = 281474977755104, token = "28eccfda4d9c9cd78d2b775fce4464cb2a24a4ec", username = "Toan 1111", isAdmin = true)
+    private val user9 = NeUser(id = 281474977316577, token = "2b635ffad7a5df1fba4de7d95a1f09182526bf69", username = "Toan 4444", isAdmin = true)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
