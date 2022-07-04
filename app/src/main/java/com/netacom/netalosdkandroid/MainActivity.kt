@@ -5,17 +5,18 @@ import android.os.Bundle
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import com.google.android.material.snackbar.Snackbar
-import com.netacom.base.chat.binding.clickDebounce
-import com.netacom.base.chat.logger.Logger
-import com.netacom.full.ui.sdk.NetAloSDK
-import com.netacom.lite.config.EndPoint
-import com.netacom.lite.define.ErrorCodeDefine
-import com.netacom.lite.define.GalleryType
-import com.netacom.lite.entity.ui.local.LocalFileModel
-import com.netacom.lite.entity.ui.theme.NeTheme
-import com.netacom.lite.entity.ui.user.NeUser
-import com.netacom.lite.network.model.response.SettingResponse
-import com.netacom.lite.util.CallbackResult
+import com.asia.sdkbase.binding.clickDebounce
+import com.asia.sdkbase.logger.Logger
+import com.asia.sdkui.ui.sdk.NetAloSDK
+import com.asia.sdkcore.config.EndPoint
+import com.asia.sdkcore.define.ErrorCodeDefine
+import com.asia.sdkcore.define.GalleryType
+import com.asia.sdkcore.entity.ui.local.LocalFileModel
+import com.asia.sdkcore.entity.ui.theme.NeTheme
+import com.asia.sdkcore.entity.ui.user.NeUser
+import com.asia.sdkcore.network.model.response.SettingResponse
+import com.asia.sdkcore.sdk.SdkCustomChatSend
+import com.asia.sdkcore.util.CallbackResult
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 
@@ -23,9 +24,23 @@ import kotlinx.coroutines.flow.collect
 @FlowPreview
 class MainActivity : AppCompatActivity() {
 
-    private val user8 = NeUser(id = 281474977316576, token = "67d69a162e3661ee2286c36d2ba1af248fc2ccfb", username = "Toan 3333", isAdmin = false)
+    private val user8 = NeUser(
+        id = 2814749772832149,
+        token = "1c5632c5dcdc339fe7478f1bd4a3f3216827ade3",
+        username = "Toan 8888",
+        // avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg",
+        isAdmin = true
+    )
 
-    private val user9 = NeUser(id = 281474977316577, token = "2b635ffad7a5df1fba4de7d95a1f09182526bf69", username = "Toan 4444", isAdmin = true)
+    // private val user8 = NeUser(id = 3096224744870411, token = "8f3c7909ec8152ce0ae3355c0ff0a55968a98579", username = "Toan 0000", avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg", isAdmin = true)
+
+    private val user9 = NeUser(
+        id = 2814749772693227,
+        token = "777011f136b8edb137e92694b671190c174d8d7a",
+        username = "Toan 99999",
+        // avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg",
+        isAdmin = true
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +89,10 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<AppCompatButton>(R.id.btnSdkOpenChat).clickDebounce {
             NetAloSDK.openNetAloSDK(context = this, neUserChat = user9)
+           /* MainScope().launch {
+                delay(5000)
+                NetAloSDK.netAloEvent?.send(SdkCustomChatSend(hideCall = false))
+            }*/
         }
 
         findViewById<AppCompatButton>(R.id.btnBlockUser).clickDebounce {
@@ -115,9 +134,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<AppCompatButton>(R.id.btnSdkListContact).clickDebounce {
-            NetAloSDK.getListContactFromServer { listContact ->
+            /*NetAloSDK.getListContactFromServer { listContact ->
                 Logger.e("listContact=" + listContact.map { it })
-            }
+            }*/
         }
 
         findViewById<AppCompatButton>(R.id.btnStartActivitySdk).clickDebounce {

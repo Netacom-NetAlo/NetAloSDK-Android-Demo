@@ -9,13 +9,14 @@ package com.netacom.netalosdkandroid
 import android.app.Application
 import android.content.Context
 import androidx.work.Configuration
-import com.netacom.full.ui.sdk.NetAloSDK
-import com.netacom.full.ui.sdk.NetAloSdkCore
-import com.netacom.lite.entity.ui.theme.NeTheme
-import com.netacom.lite.sdk.AccountKey
-import com.netacom.lite.sdk.AppID
-import com.netacom.lite.sdk.AppKey
-import com.netacom.lite.sdk.SdkConfig
+import com.asia.sdkcore.entity.ui.theme.NeTheme
+import com.asia.sdkcore.sdk.AccountKey
+import com.asia.sdkcore.sdk.AppID
+import com.asia.sdkcore.sdk.AppKey
+import com.asia.sdkcore.sdk.SdkConfig
+import com.asia.sdkui.ui.sdk.NetAloSDK
+import com.asia.sdkui.ui.sdk.NetAloSdkCore
+
 import dagger.hilt.android.HiltAndroidApp
 import io.realm.Realm
 import javax.inject.Inject
@@ -54,15 +55,15 @@ class ChatSdkApplication : Application(), Configuration.Provider {
             context = this,
             netAloSdkCore = netAloSdkCore,
             sdkConfig = SdkConfig(
-                appId = AppID.NETALO_DEV,
-                appKey = AppKey.NETALO_DEV,
-                accountKey = AccountKey.NETALO_DEV,
+                appId = AppID.NETALO_PROD,
+                appKey = AppKey.NETALO_PROD,
+                accountKey = AccountKey.NETALO_PROD,
                 isSyncContact = false,
                 hidePhone = false,
                 hideCreateGroup = false,
                 hideAddInfoInChat = false,
                 hideInfoInChat = false,
-                hideCallInChat = true,
+                hideCallInChat = false,
                 classMainActivity = MainActivity::class.java.name
             ),
             neTheme = neTheme

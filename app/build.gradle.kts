@@ -6,8 +6,8 @@ plugins {
 }
 
 android {
-    compileSdk = 31
-    buildToolsVersion = "31.0.0"
+    compileSdk = 32
+    buildToolsVersion = "32.0.0"
 
     defaultConfig {
         applicationId = "com.netacom.netalosdkandroid"
@@ -24,7 +24,7 @@ android {
         dataBinding = true
     }
     packagingOptions {
-        exclude("META-INF/DEPENDENCIES")
+        excludes.add("META-INF/DEPENDENCIES")
         exclude("META-INF/LICENSE")
         exclude("META-INF/LICENSE.txt")
         exclude("META-INF/license.txt")
@@ -54,28 +54,18 @@ android {
     buildTypes {
         getByName("release")  {
             signingConfig = signingConfigs.getByName("release")
-            isShrinkResources = false
-            isMinifyEnabled = false
+            isShrinkResources = true
+            isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
 }
 
 dependencies {
-    val hiltVersion = "2.38.1"
-    val sdkNetAloVersion = "2.0.17"
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.0")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.2")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-
-    debugImplementation("vn.netacom:NetAloFull-Dev:$sdkNetAloVersion") //(for dev)
-    releaseImplementation("vn.netacom:NetAloFull:$sdkNetAloVersion") //(for production)
-
+    val hiltVersion = "2.42"
+    val sdkNetAloVersion = "2.4.3"
+    //debugImplementation("vn.netacom:NetAloFull-Dev:$sdkNetAloVersion") //(for dev)
+    implementation("vn.netacom:NetAloFull:$sdkNetAloVersion") //(for production)
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
     implementation("androidx.hilt:hilt-work:1.0.0")

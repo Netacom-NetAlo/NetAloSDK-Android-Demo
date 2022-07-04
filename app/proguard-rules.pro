@@ -19,6 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-
--keep class com.netacom.lite.** { *; }
--keep class com.netacom.full.** { *; }
+-keep class javax.inject.** { *; }
+-keep class dagger.** { *; }
+-keep class dagger.hilt.** { *; }
+-dontwarn dagger.**
+-dontwarn dagger.hilt.**
