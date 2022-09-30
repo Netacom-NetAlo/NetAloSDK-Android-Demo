@@ -7,66 +7,43 @@
 package com.netacom.netalosdkandroid
 
 import android.app.Application
-import android.content.Context
-import androidx.work.Configuration
-import com.asia.sdkcore.entity.ui.theme.NeTheme
-import com.asia.sdkcore.sdk.AccountKey
-import com.asia.sdkcore.sdk.AppID
-import com.asia.sdkcore.sdk.AppKey
-import com.asia.sdkcore.sdk.SdkConfig
-import com.asia.sdkui.ui.sdk.NetAloSDK
-import com.asia.sdkui.ui.sdk.NetAloSdkCore
-
-import dagger.hilt.android.HiltAndroidApp
-import io.realm.Realm
-import javax.inject.Inject
+import com.asia.sdkcore.model.sdk.*
+import com.asia.sdkui.sdk.ChatSDK
 
 /**Created by vantoan on 23,July,2020
 Company: Netacom.
 Email: huynhvantoan.itc@gmail.com
  */
 
-@HiltAndroidApp
-class ChatSdkApplication : Application(), Configuration.Provider {
-
-    @Inject
-    lateinit var netAloSdkCore: NetAloSdkCore
-
-    override fun getWorkManagerConfiguration() =
-        Configuration.Builder()
-            .setWorkerFactory(netAloSdkCore.workerFactory)
-            .build()
-
-    private var neTheme = NeTheme(
-        mainColor = "#f5783f",
-        subColorLight = "#F9D9C9",
-        subColorDark = "#683A00",
-        toolbarDrawable = "#f5783f",
-    )
-
-    override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
-        Realm.init(this)
-    }
+class ChatSdkApplication : Application(){
 
     override fun onCreate() {
         super.onCreate()
-        NetAloSDK.initNetAloSDK(
+        ChatSDK.initSDK(
             context = this,
-            netAloSdkCore = netAloSdkCore,
-            sdkConfig = SdkConfig(
-                appId = AppID.NETALO_PROD,
-                appKey = AppKey.NETALO_PROD,
-                accountKey = AccountKey.NETALO_PROD,
-                isSyncContact = false,
-                hidePhone = false,
-                hideCreateGroup = false,
-                hideAddInfoInChat = false,
-                hideInfoInChat = false,
-                hideCallInChat = false,
-                classMainActivity = MainActivity::class.java.name
-            ),
-            neTheme = neTheme
+            sdkInit = SDKInit(
+                key = SDKKey(
+                    appId = 1,
+                    appKey = "appkey",
+                    accountKey = "adminkey"
+                ),
+                theme = SDKTheme(
+                    mainColor = "#f5783f",
+                    toolbarColor = "#f5783f"
+                ),
+                config = SDKConfig(
+                    isSyncContact = false,
+                    hidePhone = false,
+                    hideCreateGroup = false,
+                    hideAddInfoInChat = false,
+                    hideInfoInChat = false,
+                    hideCallInChat = false,
+                    classMainActivity = MainActivity::class.java.name
+                ),
+                setting = SDKSetting(
+
+                )
+            )
         )
     }
 }

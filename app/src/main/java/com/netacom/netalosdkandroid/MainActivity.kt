@@ -5,18 +5,12 @@ import android.os.Bundle
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import com.google.android.material.snackbar.Snackbar
-import com.asia.sdkbase.binding.clickDebounce
 import com.asia.sdkbase.logger.Logger
-import com.asia.sdkui.ui.sdk.NetAloSDK
 import com.asia.sdkcore.config.EndPoint
-import com.asia.sdkcore.define.ErrorCodeDefine
-import com.asia.sdkcore.define.GalleryType
-import com.asia.sdkcore.entity.ui.local.LocalFileModel
-import com.asia.sdkcore.entity.ui.theme.NeTheme
-import com.asia.sdkcore.entity.ui.user.NeUser
-import com.asia.sdkcore.network.model.response.SettingResponse
-import com.asia.sdkcore.sdk.SdkCustomChatSend
+import com.asia.sdkcore.model.sdk.SDKTheme
+import com.asia.sdkcore.model.ui.user.NeUser
 import com.asia.sdkcore.util.CallbackResult
+import com.asia.sdkui.sdk.ChatSDK
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 
@@ -29,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         token = "1c5632c5dcdc339fe7478f1bd4a3f3216827ade3",
         username = "Toan 8888",
         // avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg",
-        isAdmin = true
     )
 
     // private val user8 = NeUser(id = 3096224744870411, token = "8f3c7909ec8152ce0ae3355c0ff0a55968a98579", username = "Toan 0000", avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg", isAdmin = true)
@@ -39,64 +32,51 @@ class MainActivity : AppCompatActivity() {
         token = "777011f136b8edb137e92694b671190c174d8d7a",
         username = "Toan 99999",
         // avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg",
-        isAdmin = true
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         resultListener()
-        findViewById<AppCompatButton>(R.id.btnSdkThemeGreen).clickDebounce {
-            NetAloSDK.initTheme(
-                NeTheme(
+        findViewById<AppCompatButton>(R.id.btnSdkThemeGreen).setOnClickListener {
+            ChatSDK.initTheme(
+                SDKTheme(
                     mainColor = "#00B14F",
-                    subColorLight = "#D6F3E2",
-                    subColorDark = "#683A00",
-                    toolbarDrawable = "#00B14F"
-                )
-            )
-            NetAloSDK.initSetting(
-                settingResponse = SettingResponse(
-                    apiEndpoint = EndPoint.URL_API,
-                    cdnEndpoint = EndPoint.URL_CDN,
-                    chatEndpoint = EndPoint.URL_SOCKET,
-                    turnserverEndpoint = EndPoint.URL_TURN
+                    toolbarColor = "#00B14F"
                 )
             )
         }
-        findViewById<AppCompatButton>(R.id.btnSdkThemeOrange).clickDebounce {
-            NetAloSDK.initTheme(
-                NeTheme(
+        findViewById<AppCompatButton>(R.id.btnSdkThemeOrange).setOnClickListener {
+            ChatSDK.initTheme(
+                SDKTheme(
                     mainColor = "#f5783f",
-                    subColorLight = "#4df5783f",
-                    subColorDark = "#683A00",
-                    toolbarDrawable = "#f5783f"
+                    toolbarColor = "#f5783f"
                 )
             )
         }
-        findViewById<AppCompatButton>(R.id.btnSdk).clickDebounce {
-            NetAloSDK.setNetAloUser(user8)
+        findViewById<AppCompatButton>(R.id.btnSdk).setOnClickListener {
+            ChatSDK.setUserSDK(user8)
         }
-        findViewById<AppCompatButton>(R.id.btnSdkOpenChatChange).clickDebounce {
-            NetAloSDK.setNetAloUser(user9)
+        findViewById<AppCompatButton>(R.id.btnSdkOpenChatChange).setOnClickListener {
+            ChatSDK.setUserSDK(user9)
         }
-        findViewById<AppCompatButton>(R.id.btnSdkOpen).clickDebounce {
-            NetAloSDK.openNetAloSDK(this)
+        findViewById<AppCompatButton>(R.id.btnSdkOpen).setOnClickListener {
+            ChatSDK.openChatSDK(this)
             MainScope().launch {
                 delay(5000)
                 // NetAloSDK.getListContactLocal()
             }
         }
-        findViewById<AppCompatButton>(R.id.btnSdkOpenChat).clickDebounce {
-            NetAloSDK.openNetAloSDK(context = this, neUserChat = user9)
+        findViewById<AppCompatButton>(R.id.btnSdkOpenChat).setOnClickListener {
+            ChatSDK.openChatSDK(context = this, neUser = user9)
            /* MainScope().launch {
                 delay(5000)
                 NetAloSDK.netAloEvent?.send(SdkCustomChatSend(hideCall = false))
             }*/
         }
 
-        findViewById<AppCompatButton>(R.id.btnBlockUser).clickDebounce {
-            NetAloSDK.blockUser(userId = user9.id, isBlock = true, callbackResult = object : CallbackResult<Boolean> {
+        findViewById<AppCompatButton>(R.id.btnBlockUser).setOnClickListener {
+            /*ChatSDK.blockUser(userId = user9.id, isBlock = true, callbackResult = object : CallbackResult<Boolean> {
                 override fun callBackSuccess(result: Boolean) {
                     Logger.e("btnBlockUser:callBackSuccess=")
                 }
@@ -105,17 +85,17 @@ class MainActivity : AppCompatActivity() {
                     Logger.e("btnBlockUser:callBackError=")
                 }
 
-            })
+            })*/
         }
 
-        findViewById<AppCompatButton>(R.id.btnCustomUser).clickDebounce {
+        findViewById<AppCompatButton>(R.id.btnCustomUser).setOnClickListener {
             val userId = findViewById<AppCompatEditText>(R.id.editId).text.toString().toLongOrNull()
             val token = findViewById<AppCompatEditText>(R.id.editToken).text.toString()
             if (userId == null || token.isEmpty()) {
                 Snackbar.make(findViewById(R.id.view), "Mời nhập ID và token để set User custom!", Snackbar.LENGTH_LONG).show()
-                return@clickDebounce
+                return@setOnClickListener
             }
-            NetAloSDK.setNetAloUser(
+            ChatSDK.setUserSDK(
                 neUser = NeUser(
                     id = userId,
                     token = token,
@@ -126,26 +106,26 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        findViewById<AppCompatButton>(R.id.btnSdkLogOut).clickDebounce {
+        findViewById<AppCompatButton>(R.id.btnSdkLogOut).setOnClickListener {
             //NetAloSDK.netAloEvent?.send(LocalFileModel(filePath = ""))
             val map: MutableMap<String, String> = mutableMapOf()
             map["test"] = "data"
-            NetAloSDK.eventFireBase(map)
+            //ChatSDK.eventFireBase(map)
         }
 
-        findViewById<AppCompatButton>(R.id.btnSdkListContact).clickDebounce {
+        findViewById<AppCompatButton>(R.id.btnSdkListContact).setOnClickListener {
             /*NetAloSDK.getListContactFromServer { listContact ->
                 Logger.e("listContact=" + listContact.map { it })
             }*/
         }
 
-        findViewById<AppCompatButton>(R.id.btnStartActivitySdk).clickDebounce {
-            NetAloSDK.openGallery(context = this, maxSelections = 1, autoDismissOnMaxSelections = false, galleryType = GalleryType.GALLERY_ALL)
+        findViewById<AppCompatButton>(R.id.btnStartActivitySdk).setOnClickListener {
+           // NetAloSDK.openGallery(context = this, maxSelections = 1, autoDismissOnMaxSelections = false, galleryType = GalleryType.GALLERY_ALL)
         }
     }
 
     private fun resultListener() {
-        CoroutineScope(Dispatchers.Default).launch {
+       /* CoroutineScope(Dispatchers.Default).launch {
             NetAloSDK.netAloEvent?.receive<ArrayList<LocalFileModel>>()?.collect { listPhoto ->
                 Logger.e("SELECT_PHOTO_VIDEO==$listPhoto")
             }
@@ -179,6 +159,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
+        }*/
     }
 }

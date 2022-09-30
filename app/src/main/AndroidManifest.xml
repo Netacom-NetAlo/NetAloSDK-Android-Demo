@@ -25,7 +25,16 @@
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
-            tools:node="remove" />
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+            <meta-data
+                android:name="com.asia.sdkui.startup.KoinInitializer"
+                android:value="androidx.startup" />
+        </provider>
     </application>
 
 </manifest>
