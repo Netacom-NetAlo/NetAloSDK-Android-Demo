@@ -19,19 +19,17 @@ import kotlinx.coroutines.flow.collect
 class MainActivity : AppCompatActivity() {
 
     private val user8 = NeUser(
-        id = 2814749772832149,
-        token = "1c5632c5dcdc339fe7478f1bd4a3f3216827ade3",
+        id = 281474977316524,
+        token = "04096f47570ae270448e85222bf6cfec09d0JFia",
         username = "Toan 8888",
-        // avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg",
     )
 
-    // private val user8 = NeUser(id = 3096224744870411, token = "8f3c7909ec8152ce0ae3355c0ff0a55968a98579", username = "Toan 0000", avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg", isAdmin = true)
+    // private val user8 = NeUser(id = 281474977724873, token = "ab2abf2a8cfbe6d6dd343e39b3e3adfe90863b4a", username = "Toan 0000", avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg", isAdmin = true)
 
     private val user9 = NeUser(
-        id = 2814749772693227,
-        token = "777011f136b8edb137e92694b671190c174d8d7a",
-        username = "Toan 99999",
-        // avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg",
+        id = 281474977316531,
+        token = "0409742fdecad204451b8081b349d740e5ffQQb7",
+        username = "Toan 9999",
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
