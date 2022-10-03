@@ -1,36 +1,31 @@
 package com.netacom.netalosdkandroid
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
-import com.google.android.material.snackbar.Snackbar
 import com.asia.sdkbase.logger.Logger
-import com.asia.sdkcore.config.EndPoint
 import com.asia.sdkcore.model.sdk.SDKTheme
 import com.asia.sdkcore.model.ui.user.NeUser
-import com.asia.sdkcore.util.CallbackResult
 import com.asia.sdkui.sdk.ChatSDK
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
 
 @ExperimentalCoroutinesApi
 @FlowPreview
 class MainActivity : AppCompatActivity() {
-
-    private val user8 = NeUser(
-        id = 281474977316524,
-        token = "04096f47570ae270448e85222bf6cfec09d0JFia",
-        username = "Toan 8888",
+    private val userDemo1 = NeUser(
+        id = 2814749772832149,
+        token = "0641123a602b34854bdda80fbd3aebf3a69eqdXN",
+        username = "Toan 8888"
     )
 
-    // private val user8 = NeUser(id = 281474977724873, token = "ab2abf2a8cfbe6d6dd343e39b3e3adfe90863b4a", username = "Toan 0000", avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg", isAdmin = true)
-
-    private val user9 = NeUser(
-        id = 281474977316531,
-        token = "0409742fdecad204451b8081b349d740e5ffQQb7",
-        username = "Toan 9999",
+    private val userDemo2 = NeUser(
+        id = 2814749772693227,
+        token = "0342c809e0966a92491782d19c1276ab1eeeU9ee",
+        username = "Toan 9999"
     )
+    private var isUserDemo1 = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,24 +48,30 @@ class MainActivity : AppCompatActivity() {
             )
         }
         findViewById<AppCompatButton>(R.id.btnSdk).setOnClickListener {
-            ChatSDK.setUserSDK(user8)
+            isUserDemo1 = true
+            ChatSDK.setUserSDK(userDemo1)
         }
         findViewById<AppCompatButton>(R.id.btnSdkOpenChatChange).setOnClickListener {
-            ChatSDK.setUserSDK(user9)
+            isUserDemo1 = false
+            ChatSDK.setUserSDK(userDemo2)
         }
         findViewById<AppCompatButton>(R.id.btnSdkOpen).setOnClickListener {
-            ChatSDK.openChatSDK(this)
+            ChatSDK.openListConversationSDK {
+                Logger.e(it)
+            }
             MainScope().launch {
                 delay(5000)
                 // NetAloSDK.getListContactLocal()
             }
         }
         findViewById<AppCompatButton>(R.id.btnSdkOpenChat).setOnClickListener {
-            ChatSDK.openChatSDK(context = this, neUser = user9)
-           /* MainScope().launch {
-                delay(5000)
-                NetAloSDK.netAloEvent?.send(SdkCustomChatSend(hideCall = false))
-            }*/
+            ChatSDK.openChatSDK(neUser = if (isUserDemo1) userDemo2 else userDemo1) {
+                Logger.e(it)
+            }
+            /* MainScope().launch {
+                 delay(5000)
+                 NetAloSDK.netAloEvent?.send(SdkCustomChatSend(hideCall = false))
+             }*/
         }
 
         findViewById<AppCompatButton>(R.id.btnBlockUser).setOnClickListener {
@@ -118,45 +119,45 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<AppCompatButton>(R.id.btnStartActivitySdk).setOnClickListener {
-           // NetAloSDK.openGallery(context = this, maxSelections = 1, autoDismissOnMaxSelections = false, galleryType = GalleryType.GALLERY_ALL)
+            // NetAloSDK.openGallery(context = this, maxSelections = 1, autoDismissOnMaxSelections = false, galleryType = GalleryType.GALLERY_ALL)
         }
     }
 
     private fun resultListener() {
-       /* CoroutineScope(Dispatchers.Default).launch {
-            NetAloSDK.netAloEvent?.receive<ArrayList<LocalFileModel>>()?.collect { listPhoto ->
-                Logger.e("SELECT_PHOTO_VIDEO==$listPhoto")
-            }
-        }
+        /* CoroutineScope(Dispatchers.Default).launch {
+             NetAloSDK.netAloEvent?.receive<ArrayList<LocalFileModel>>()?.collect { listPhoto ->
+                 Logger.e("SELECT_PHOTO_VIDEO==$listPhoto")
+             }
+         }
 
-        CoroutineScope(Dispatchers.Default).launch {
-            NetAloSDK.netAloEvent?.receive<LocalFileModel>()?.collect { document ->
-                Logger.e("SELECT_FILE==$document")
-            }
+         CoroutineScope(Dispatchers.Default).launch {
+             NetAloSDK.netAloEvent?.receive<LocalFileModel>()?.collect { document ->
+                 Logger.e("SELECT_FILE==$document")
+             }
 
-        }
+         }
 
-        CoroutineScope(Dispatchers.Default).launch {
-            NetAloSDK.netAloEvent?.receive<Map<String, String>>()?.collect { notification ->
-                Logger.e("Notification:data==$notification")
-            }
-        }
+         CoroutineScope(Dispatchers.Default).launch {
+             NetAloSDK.netAloEvent?.receive<Map<String, String>>()?.collect { notification ->
+                 Logger.e("Notification:data==$notification")
+             }
+         }
 
-        CoroutineScope(Dispatchers.Default).launch {
-            NetAloSDK.netAloEvent?.receive<Int>()?.collect { errorEvent ->
-                Logger.e("Event:==$errorEvent")
-                when (errorEvent) {
-                    ErrorCodeDefine.ERRORCODE_FAILED_VALUE -> {
-                        Logger.e("Event:Socket error")
-                    }
-                    ErrorCodeDefine.ERRORCODE_EXPIRED_VALUE -> {
-                        Logger.e("Event:Session expired")
-                    }
-                    ErrorCodeDefine.ERRORCODE_LOGIN_CONFLICT_VALUE -> {
-                        Logger.e("Event:Login conflict")
-                    }
-                }
-            }
-        }*/
+         CoroutineScope(Dispatchers.Default).launch {
+             NetAloSDK.netAloEvent?.receive<Int>()?.collect { errorEvent ->
+                 Logger.e("Event:==$errorEvent")
+                 when (errorEvent) {
+                     ErrorCodeDefine.ERRORCODE_FAILED_VALUE -> {
+                         Logger.e("Event:Socket error")
+                     }
+                     ErrorCodeDefine.ERRORCODE_EXPIRED_VALUE -> {
+                         Logger.e("Event:Session expired")
+                     }
+                     ErrorCodeDefine.ERRORCODE_LOGIN_CONFLICT_VALUE -> {
+                         Logger.e("Event:Login conflict")
+                     }
+                 }
+             }
+         }*/
     }
 }
