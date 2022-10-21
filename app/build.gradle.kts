@@ -63,9 +63,9 @@ android {
 
 dependencies {
     val hiltVersion = "2.42"
-    val sdkNetAloVersion = "2.4.3"
+    val sdkNetAloVersion = "2.5.4"
     //debugImplementation("vn.netacom:NetAloFull-Dev:$sdkNetAloVersion") //(for dev)
-    implementation("vn.netacom:NetAloFull:$sdkNetAloVersion") //(for production)
+    implementation("vn.netacom:NetAloFull-Dev:$sdkNetAloVersion") //(for production)
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
     implementation("androidx.hilt:hilt-work:1.0.0")

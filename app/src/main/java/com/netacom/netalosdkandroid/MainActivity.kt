@@ -17,6 +17,7 @@ import com.asia.sdkcore.entity.ui.user.NeUser
 import com.asia.sdkcore.network.model.response.SettingResponse
 import com.asia.sdkcore.sdk.SdkCustomChatSend
 import com.asia.sdkcore.util.CallbackResult
+import com.google.firebase.messaging.RemoteMessage
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 
@@ -25,8 +26,8 @@ import kotlinx.coroutines.flow.collect
 class MainActivity : AppCompatActivity() {
 
     private val user8 = NeUser(
-        id = 2814749772832149,
-        token = "1c5632c5dcdc339fe7478f1bd4a3f3216827ade3",
+        id = 5348024558706782,
+        token = "0409f5d5ef42216e46978f8dbd3493cbbbf0GMC1",
         username = "Toan 8888",
         // avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg",
         isAdmin = true
@@ -59,8 +60,7 @@ class MainActivity : AppCompatActivity() {
                 settingResponse = SettingResponse(
                     apiEndpoint = EndPoint.URL_API,
                     cdnEndpoint = EndPoint.URL_CDN,
-                    chatEndpoint = EndPoint.URL_SOCKET,
-                    turnserverEndpoint = EndPoint.URL_TURN
+                    chatEndpoint = EndPoint.URL_SOCKET
                 )
             )
         }
@@ -128,9 +128,8 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<AppCompatButton>(R.id.btnSdkLogOut).clickDebounce {
             //NetAloSDK.netAloEvent?.send(LocalFileModel(filePath = ""))
-            val map: MutableMap<String, String> = mutableMapOf()
-            map["test"] = "data"
-            NetAloSDK.eventFireBase(map)
+            val map: RemoteMessage = RemoteMessage(Bundle())
+            NetAloSDK.initFirebase(this, map)
         }
 
         findViewById<AppCompatButton>(R.id.btnSdkListContact).clickDebounce {
