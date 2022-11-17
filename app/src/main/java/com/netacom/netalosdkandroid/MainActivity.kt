@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private val user8 = NeUser(
         id = 5348024558706782,
-        token = "0409f5d5ef42216e46978f8dbd3493cbbbf0GMC1",
+        token = "0409a3591c69028242dba72dfd719fa73927bnXO",
         username = "Toan 8888",
         // avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg",
         isAdmin = true
