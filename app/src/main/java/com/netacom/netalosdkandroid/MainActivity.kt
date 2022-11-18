@@ -56,18 +56,14 @@ class MainActivity : AppCompatActivity() {
             ChatSDK.setUserSDK(userDemo2)
         }
         findViewById<AppCompatButton>(R.id.btnSdkOpen).setOnClickListener {
-            ChatSDK.openListConversationSDK {
-                Logger.e(it)
-            }
+            ChatSDK.openListConversationSDK()
             MainScope().launch {
                 delay(5000)
                 // NetAloSDK.getListContactLocal()
             }
         }
         findViewById<AppCompatButton>(R.id.btnSdkOpenChat).setOnClickListener {
-            ChatSDK.openChatSDK(neUser = if (isUserDemo1) userDemo2 else userDemo1) {
-                Logger.e(it)
-            }
+            ChatSDK.openChatSDK(neUser = if (isUserDemo1) userDemo2 else userDemo1)
             /* MainScope().launch {
                  delay(5000)
                  NetAloSDK.netAloEvent?.send(SdkCustomChatSend(hideCall = false))
