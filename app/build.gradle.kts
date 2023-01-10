@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.netacom.netalosdkandroid"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 31
         versionCode = 1
         versionName = "1.0"
@@ -42,8 +42,8 @@ android {
 }
 
 dependencies {
-    val sdkChatVersion = "1.0.0"
+    val sdkChatVersion = "1.0.2"
     //debugImplementation("vn.asia:ChatSDKUI-Dev:sdkChatVersion") //(for dev)
-    implementation("vn.netacom.chatSDK:ChatSDK-Dev:$sdkChatVersion") //(for production)
+    implementation("vn.chat-sdk:chat:$sdkChatVersion") //(for production)
     implementation("com.google.android.material:material:1.7.0")
 }
