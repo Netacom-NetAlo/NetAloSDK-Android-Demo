@@ -2,6 +2,7 @@ package com.netacom.netalosdkandroid
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import com.google.android.material.snackbar.Snackbar
@@ -11,6 +12,7 @@ import com.asia.sdkui.ui.sdk.NetAloSDK
 import com.asia.sdkcore.config.EndPoint
 import com.asia.sdkcore.define.ErrorCodeDefine
 import com.asia.sdkcore.define.GalleryType
+import com.asia.sdkcore.define.NavigationDef
 import com.asia.sdkcore.entity.ui.local.LocalFileModel
 import com.asia.sdkcore.entity.ui.theme.NeTheme
 import com.asia.sdkcore.entity.ui.user.NeUser
@@ -26,9 +28,9 @@ import kotlinx.coroutines.flow.collect
 class MainActivity : AppCompatActivity() {
 
     private val user8 = NeUser(
-        id = 5348024558706782,
-        token = "0409a3591c69028242dba72dfd719fa73927bnXO",
-        username = "Toan 8888",
+        id = 2814749772802146,
+        token = "07643c58031038cc41f7bfded5fb69464de1SBVT",
+        username = "Toan 000000",
         // avatar = "Attachments/f91f5ef2-fa03-4d73-b549-60b6ca3c90a0_332CF1D4-8681-4EAF-9EC7-5BB42E8AF5EF.jpg",
         isAdmin = true
     )
@@ -46,6 +48,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+        //Open chat from notification
+        NetAloSDK.registerClickNotification(context = this, intent = intent)
         resultListener()
         findViewById<AppCompatButton>(R.id.btnSdkThemeGreen).clickDebounce {
             NetAloSDK.initTheme(
@@ -140,6 +144,12 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<AppCompatButton>(R.id.btnStartActivitySdk).clickDebounce {
             NetAloSDK.openGallery(context = this, maxSelections = 1, autoDismissOnMaxSelections = false, galleryType = GalleryType.GALLERY_ALL)
+        }
+
+        findViewById<AppCompatButton>(R.id.btnSendNotification).clickDebounce {
+            val json = "{\"Payload\":\"{\\\"messageId\\\":\\\"7193854362421284869\\\",\\\"groupId\\\":\\\"2924519172223396\\\",\\\"message\\\":\\\"hello\\\",\\\"senderUin\\\":\\\"2814749769028944\\\",\\\"createdAt\\\":\\\"1670909665060559\\\",\\\"recipientUins\\\":[\\\"2814749769028944\\\",\\\"2814749772802146\\\"],\\\"senderName\\\":\\\"Cfg\\\",\\\"groupType\\\":\\\"GROUP_TYPE_PUBLIC\\\",\\\"nonce\\\":\\\"1670909659282611\\\",\\\"version\\\":1}\",\"Type\":\"message\"}"
+            val remoteMessage = RemoteMessage.Builder("Data").addData("Data", json).build()
+            NetAloSDK.initFirebase(this, remoteMessage)
         }
     }
 

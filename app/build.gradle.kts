@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.netacom.netalosdkandroid"
         minSdk = 23
-        targetSdk = 30
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -63,9 +63,9 @@ android {
 
 dependencies {
     val hiltVersion = "2.42"
-    val sdkNetAloVersion = "2.5.5"
+    val sdkNetAloVersion = "2.5.6"
     //debugImplementation("vn.netacom:NetAloFull-Dev:$sdkNetAloVersion") //(for dev)
-    implementation("vn.netacom.chatSDK:NetAloFull-Dev:$sdkNetAloVersion") //(for production)
+    implementation("vn.netacom.chatSDK:NetAloFull:$sdkNetAloVersion") //(for production)
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
     implementation("androidx.hilt:hilt-work:1.0.0")
