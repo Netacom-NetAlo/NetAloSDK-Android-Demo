@@ -15,14 +15,6 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
-//
-//    compileOptions {
-//        sourceCompatibility = JavaVersion.VERSION_1_8
-//        targetCompatibility = JavaVersion.VERSION_1_8
-//    }
-//    kotlinOptions {
-//        jvmTarget = "1.8"
-//    }
     signingConfigs {
         create("release") {
             storeFile = file("/Volumes/Data/Work/Netacom/SDK/NetAloSdkAndroid/demo.jks")
@@ -42,8 +34,8 @@ android {
 }
 
 dependencies {
-    val sdkChatVersion = "1.0.2"
+    val sdkChatVersion = "1.0.3"
     //debugImplementation("vn.asia:ChatSDKUI-Dev:sdkChatVersion") //(for dev)
     implementation("vn.chat-sdk:chat:$sdkChatVersion") //(for production)
-    implementation("com.google.android.material:material:1.7.0")
+    implementation("com.google.android.material:material:1.8.0")
 }
