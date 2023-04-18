@@ -34,8 +34,8 @@ android {
 }
 
 dependencies {
-    val sdkChatVersion = "1.0.3"
-    //debugImplementation("vn.asia:ChatSDKUI-Dev:sdkChatVersion") //(for dev)
-    implementation("vn.chat-sdk:chat:$sdkChatVersion") //(for production)
+    val sdkChatVersion = "1.3.4"
+    implementation("vn.chat-sdk:chat-Dev:$sdkChatVersion") //(for dev)
+    //implementation("vn.chat-sdk:chat:$sdkChatVersion") //(for production)
     implementation("com.google.android.material:material:1.8.0")
 }
