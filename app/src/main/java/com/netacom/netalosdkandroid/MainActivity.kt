@@ -15,15 +15,15 @@ import kotlinx.coroutines.*
 @FlowPreview
 class MainActivity : AppCompatActivity() {
     private val userDemo1 = NeUser(
-        id = 2814749772832149,
-        token = "0641123a602b34854bdda80fbd3aebf3a69eqdXN",
-        username = "Toan 8888"
+        id = 2814749772611618,
+        token = "0292f07ee63d8aee4dabafcac08dd021df4fjO50",
+        username = "+84101676767"
     )
 
     private val userDemo2 = NeUser(
-        id = 2814749772693227,
-        token = "0342c809e0966a92491782d19c1276ab1eeeU9ee",
-        username = "Toan 9999"
+        id = 2814749772652060,
+        token = "0229ad3a531384f0487393b3101165bd90b04mC9",
+        username = "+84101686868"
     )
     private var isUserDemo1 = true
 

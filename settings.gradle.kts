@@ -5,7 +5,6 @@ dependencyResolutionManagement {
         mavenCentral()
         mavenLocal()
         maven(url = "https://jitpack.io")
-        maven(url = "https://plugins.gradle.org/m2/")
         maven(url = "https://github.com/Netacom-NetAlo/NetaloSDKs-Android/raw/main/ChatSDK")
     }
 }
